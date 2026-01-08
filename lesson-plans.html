@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lesson Plans - Phoenix T. Bird</title>
+    <meta name="description" content="Educational lesson plans and teaching resources by Phoenix T. Bird for technology and AI integration in education.">
+    <link rel="stylesheet" href="css/styles.css?v=2026-01-08">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Shadows+Into+Light&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        .lessons-header {
+            background: linear-gradient(45deg, rgba(237, 19, 19, 1) 0%, rgba(154, 0, 237, 1) 100%);
+            text-align: center;
+            padding: 120px 20px 80px;
+            margin-top: 0;
+            margin-bottom: 3rem;
+        }
+
+        .lessons-header h1 {
+            font-size: 3rem;
+            color: #fff;
+            margin-bottom: 1rem;
+        }
+
+        .lessons-header p {
+            font-size: 1.2rem;
+            color: #fff;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .lessons-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px 80px;
+        }
+
+        .lessons-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 2rem;
+        }
+
+        .lesson-card {
+            background: #fff;
+            border-radius: 8px;
+            padding: 2rem;
+            box-shadow: 0 4px 15px rgba(154, 0, 237, 0.3);
+            transition: transform 0.3s ease;
+        }
+
+        .lesson-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .lesson-icon {
+            font-size: 3rem;
+            background: linear-gradient(45deg, rgba(237, 19, 19, 1) 0%, rgba(154, 0, 237, 1) 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 1rem;
+        }
+
+        .lesson-card h3 {
+            color: #1a2332;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .lesson-card p {
+            color: #555;
+            line-height: 1.6;
+            margin-bottom: 1rem;
+        }
+
+        .lesson-meta {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            margin-bottom: 1rem;
+        }
+
+        .meta-tag {
+            background: rgba(154, 0, 237, 0.1);
+            color: #9a00ed;
+            padding: 0.3rem 0.8rem;
+            border-radius: 15px;
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+
+        .lesson-link {
+            display: inline-block;
+            color: #4a90e2;
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s ease;
+        }
+
+        .lesson-link:hover {
+            color: #9a00ed;
+        }
+
+        .coming-soon {
+            text-align: center;
+            padding: 4rem 2rem;
+            background: #f8f9fa;
+            border-radius: 8px;
+            margin-bottom: 2rem;
+        }
+
+        .coming-soon i {
+            font-size: 4rem;
+            color: #9a00ed;
+            margin-bottom: 1rem;
+        }
+
+        .coming-soon h2 {
+            color: #1a2332;
+            margin-bottom: 1rem;
+        }
+
+        .coming-soon p {
+            color: #555;
+            font-size: 1.1rem;
+        }
+
+        @media (max-width: 768px) {
+            .lessons-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .lessons-header h1 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="/" class="logo">Phoenix T. Bird</a>
+            <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+            </button>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="index.html#projects">Projects</a></li>
+                <li><a href="ai-projects.html">AI Blog</a></li>
+                <li><a href="index.html#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="lessons-header">
+        <h1>Lesson Plans & Resources</h1>
+        <p>Educational resources for integrating technology and AI into the classroom</p>
+    </div>
+
+    <div class="lessons-container">
+        <div class="coming-soon">
+            <i class="fas fa-book-open"></i>
+            <h2>Educational Resources Coming Soon</h2>
+            <p>Lesson plans, teaching guides, and educational resources are being developed. Check back soon for updates!</p>
+        </div>
+
+        <div class="lessons-grid">
+            <!-- Example lesson card structure for when content is added -->
+            <div class="lesson-card">
+                <i class="fas fa-robot lesson-icon"></i>
+                <h3>AI in Education</h3>
+                <div class="lesson-meta">
+                    <span class="meta-tag">High School</span>
+                    <span class="meta-tag">Technology</span>
+                    <span class="meta-tag">AI</span>
+                </div>
+                <p>Lesson plans and activities for introducing artificial intelligence concepts in the classroom. Includes hands-on projects and real-world applications.</p>
+                <a href="#" class="lesson-link">Coming Soon →</a>
+            </div>
+
+            <div class="lesson-card">
+                <i class="fas fa-code lesson-icon"></i>
+                <h3>Coding Fundamentals</h3>
+                <div class="lesson-meta">
+                    <span class="meta-tag">Middle School</span>
+                    <span class="meta-tag">Programming</span>
+                </div>
+                <p>Step-by-step lesson plans for teaching programming basics. Includes visual programming tools and text-based coding introduction.</p>
+                <a href="#" class="lesson-link">Coming Soon →</a>
+            </div>
+
+            <div class="lesson-card">
+                <i class="fas fa-lightbulb lesson-icon"></i>
+                <h3>Creative Problem Solving</h3>
+                <div class="lesson-meta">
+                    <span class="meta-tag">All Grades</span>
+                    <span class="meta-tag">STEM</span>
+                </div>
+                <p>Cross-curricular activities that develop critical thinking and problem-solving skills using technology and real-world scenarios.</p>
+                <a href="#" class="lesson-link">Coming Soon →</a>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <p>&copy; 2025 Phoenix T. Bird. All rights reserved.</p>
+                <p class="footer-tech">Built with HTML5, CSS3, and vanilla JavaScript</p>
+                <p class="footer-update">Last updated: January 2026</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        const hamburger = document.getElementById('hamburger');
+        const navLinks = document.getElementById('navLinks');
+
+        hamburger.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+            hamburger.classList.toggle('active');
+        });
+
+        const links = navLinks.querySelectorAll('a');
+        links.forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+                hamburger.classList.remove('active');
+            });
+        });
+
+        document.addEventListener('click', (e) => {
+            if (!hamburger.contains(e.target) && !navLinks.contains(e.target)) {
+                navLinks.classList.remove('active');
+                hamburger.classList.remove('active');
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,65 @@
+# FTP Upload Scripts (contain credentials)
+upload-via-curl.sh
+ftp-upload.sh
+upload-to-host.sh
+
+# IDE and Editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Environment files
+.env
+.env.local
+.env.*.local
+
+# Temporary files
+*.tmp
+*.temp
+.cache/
+
+# Build files (if any)
+dist/
+build/
+
+# WordPress installation directory
+ai/
+
+# Teaching redirect file (minimal content)
+teaching.html
+
+# WordPress backup directory (may contain security issues)
+wordpress-backup/
+
+# WordPress zip files
+*.zip
+
+# Upload scripts (may contain credentials)
+upload-all-changes.sh
+wordpress_publisher.py
+launch_publisher.command
+
+# FTP configuration
+ftp-simple.json
+
+# Test files
+test.html
+
+# Backup files
+*.backup
+.htaccess.backup
+teaching.htaccess
+
+# Claude settings (local config)
+.claude/
+
+# Setup documentation (keep in repo - removed from gitignore)
