@@ -10,135 +10,6 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Shadows+Into+Light&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <style>
-        .lessons-header {
-            background: linear-gradient(45deg, rgba(237, 19, 19, 1) 0%, rgba(154, 0, 237, 1) 100%);
-            text-align: center;
-            padding: 120px 20px 80px;
-            margin-top: 0;
-            margin-bottom: 3rem;
-        }
-
-        .lessons-header h1 {
-            font-size: 3rem;
-            color: #fff;
-            margin-bottom: 1rem;
-        }
-
-        .lessons-header p {
-            font-size: 1.2rem;
-            color: #fff;
-            max-width: 700px;
-            margin: 0 auto;
-        }
-
-        .lessons-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px 80px;
-        }
-
-        .lessons-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-            gap: 2rem;
-        }
-
-        .lesson-card {
-            background: #fff;
-            border-radius: 8px;
-            padding: 2rem;
-            box-shadow: 0 4px 15px rgba(154, 0, 237, 0.3);
-            transition: transform 0.3s ease;
-        }
-
-        .lesson-card:hover {
-            transform: translateY(-5px);
-        }
-
-        .lesson-icon {
-            font-size: 3rem;
-            background: linear-gradient(45deg, rgba(237, 19, 19, 1) 0%, rgba(154, 0, 237, 1) 100%);
-            -webkit-background-clip: text;
-            background-clip: text;
-            -webkit-text-fill-color: transparent;
-            margin-bottom: 1rem;
-        }
-
-        .lesson-card h3 {
-            color: #1a2332;
-            font-size: 1.5rem;
-            margin-bottom: 1rem;
-        }
-
-        .lesson-card p {
-            color: #555;
-            line-height: 1.6;
-            margin-bottom: 1rem;
-        }
-
-        .lesson-meta {
-            display: flex;
-            gap: 1rem;
-            flex-wrap: wrap;
-            margin-bottom: 1rem;
-        }
-
-        .meta-tag {
-            background: rgba(154, 0, 237, 0.1);
-            color: #9a00ed;
-            padding: 0.3rem 0.8rem;
-            border-radius: 15px;
-            font-size: 0.85rem;
-            font-weight: 500;
-        }
-
-        .lesson-link {
-            display: inline-block;
-            color: #4a90e2;
-            text-decoration: none;
-            font-weight: 600;
-            transition: color 0.3s ease;
-        }
-
-        .lesson-link:hover {
-            color: #9a00ed;
-        }
-
-        .coming-soon {
-            text-align: center;
-            padding: 4rem 2rem;
-            background: #f8f9fa;
-            border-radius: 8px;
-            margin-bottom: 2rem;
-        }
-
-        .coming-soon i {
-            font-size: 4rem;
-            color: #9a00ed;
-            margin-bottom: 1rem;
-        }
-
-        .coming-soon h2 {
-            color: #1a2332;
-            margin-bottom: 1rem;
-        }
-
-        .coming-soon p {
-            color: #555;
-            font-size: 1.1rem;
-        }
-
-        @media (max-width: 768px) {
-            .lessons-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .lessons-header h1 {
-                font-size: 2rem;
-            }
-        }
-    </style>
 </head>
 <body>
     <header>
@@ -157,10 +28,12 @@
         </nav>
     </header>
 
-    <div class="lessons-header">
-        <h1>Lesson Plans & Resources</h1>
-        <p>Educational resources for integrating technology and AI into the classroom</p>
-    </div>
+    <section class="hero">
+        <div class="container">
+            <h1>Lesson Plans & Resources</h1>
+            <p class="tagline">Educational resources for integrating technology and AI into the classroom</p>
+        </div>
+    </section>
 
     <div class="lessons-container">
         <div class="coming-soon">

@@ -119,12 +119,34 @@ nav {
 
 /* Hero Section */
 .hero {
+    position: relative;
     background: #ed1313;
     background: linear-gradient(45deg, rgba(237, 19, 19, 1) 0%, rgba(154, 0, 237, 1) 100%);
     color: #fff;
     padding: 150px 20px 100px;
     text-align: center;
     margin-top: 0;
+    overflow: hidden;
+}
+
+.hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: url('../images/backgroundFire_grey.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    opacity: 1;
+    z-index: 0;
+}
+
+.hero .container {
+    position: relative;
+    z-index: 1;
 }
 
 .hero h1 {
@@ -213,6 +235,45 @@ section h2::after {
     background-color: #fff;
 }
 
+.about-grid {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 3rem;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.about-image {
+    width: 100%;
+}
+
+.about-image img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    object-fit: cover;
+}
+
+.about-text {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.about-text p {
+    text-align: left;
+    font-size: 1.1rem;
+    line-height: 1.8;
+    color: #555;
+    margin: 0;
+}
+
+.about p {
+    text-align: center;
+    font-size: 1rem;
+}
+
 .about h2 {
     background: linear-gradient(45deg, rgba(237, 19, 19, 1) 0%, rgba(154, 0, 237, 1) 100%);
     -webkit-background-clip: text;
@@ -223,7 +284,7 @@ section h2::after {
 .about-cards {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 2rem;
+    gap: 1rem;
     max-width: 1200px;
     margin: 0 auto;
 }
@@ -231,8 +292,7 @@ section h2::after {
 .about-card {
     background-color: #fff;
     border-radius: 8px;
-    padding: 2rem;
-    box-shadow: 0 4px 15px rgba(154, 0, 237, 0.3);
+    /*padding: 1rem;*/
     text-align: center;
 }
 
@@ -244,7 +304,7 @@ section h2::after {
     display: flex;
     align-items: center;
     justify-content: center;
-    color: #999;
+    color: #686868;
     font-size: 1rem;
     overflow: hidden;
 }
@@ -364,6 +424,45 @@ section h2::after {
     line-height: 1.6;
 }
 
+/* Skillsets List (Responsive horizontal layout) */
+.skillsets-list {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 3rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.skillset-item {
+    /* No margin needed - grid gap handles spacing */
+}
+
+.skillset-item h3 {
+    color: #1a2332;
+    font-size: 1.5rem;
+    margin-bottom: 0.75rem;
+    font-weight: 600;
+}
+
+.skillset-item ul {
+    list-style-position: inside;
+    color: #555;
+    padding-left: 1rem;
+}
+
+.skillset-item li {
+    margin-bottom: 0.5rem;
+    line-height: 1.6;
+}
+
+/* Responsive breakpoints */
+@media (max-width: 768px) {
+    .skillsets-list {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+}
+
 /* Skills Section */
 .skills {
     background-color: #fff;
@@ -444,6 +543,28 @@ section h2::after {
     border: 2px solid #e0e0e0;
     box-shadow: 0 4px 15px rgba(154, 0, 237, 0.3);
 }
+.project-card a {
+    text-decoration: none;
+    color: inherit;
+    transition: transform 0.3s ease;
+}
+
+.project-card a:active{
+    transform: translateX(5px);
+}
+
+.project-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(154, 0, 237, 0.35);
+}
+
+.project-card img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 5px;
+    margin-bottom: 1rem;
+}
 
 .project-header {
     display: flex;
@@ -457,12 +578,11 @@ section h2::after {
     font-size: 1.5rem;
     margin: 0;
     flex: 1;
-}
-
-.project-header h3 a {
-    color: #4a90e2;
+    background: linear-gradient(45deg, rgba(237, 19, 19, 1) 0%, rgba(154, 0, 237, 1) 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
     text-decoration: none;
-    transition: all 0.3s ease;
     display: inline-block;
 }
 
@@ -471,7 +591,7 @@ section h2::after {
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
-    transform: translateX(5px);
+    
 }
 
 .project-links {
@@ -772,6 +892,15 @@ footer p {
         gap: 2rem;
     }
 
+    .about-grid {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+
+    .about-text p {
+        text-align: center;
+    }
+
     section h2 {
         font-size: 2rem;
     }
@@ -788,5 +917,342 @@ footer p {
 
     .icon-link {
         font-size: 3rem;
+    }
+}
+
+/* ========================================
+   AI Projects Page Styles
+   ======================================== */
+
+.projects-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0;
+}
+
+.content-wrapper {
+    display: flex;
+    gap: 2rem;
+    padding: 0 20px 80px;
+}
+
+.sidebar {
+    flex: 0 0 280px;
+    background: #f8f9fa;
+    padding: 1.5rem;
+    border-radius: 8px;
+    height: fit-content;
+    position: sticky;
+    top: 100px;
+}
+
+.sidebar h3 {
+    color: #1a2332;
+    font-size: 1.3rem;
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid #4a90e2;
+}
+
+.sidebar-links {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.sidebar-links li {
+    margin-bottom: 0.8rem;
+}
+
+.sidebar-links a {
+    color: #4a90e2;
+    text-decoration: none;
+    display: block;
+    padding: 0.5rem;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+    font-size: 0.95rem;
+    line-height: 1.4;
+}
+
+.sidebar-links a:hover {
+    background: #fff;
+    color: #357abd;
+    padding-left: 1rem;
+}
+
+.main-content {
+    flex: 1;
+    min-width: 0;
+}
+
+.projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 2rem;
+}
+
+.project-image {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    background: linear-gradient(135deg, #1a2332 0%, #4a90e2 100%);
+}
+
+.project-content {
+    padding: 1.5rem;
+}
+
+.project-title {
+    font-size: 1.5rem;
+    color: #1a2332;
+    margin-bottom: 0.5rem;
+}
+
+.project-date {
+    font-size: 0.9rem;
+    color: #999;
+    margin-bottom: 1rem;
+}
+
+.project-excerpt {
+    color: #555;
+    line-height: 1.6;
+    margin-bottom: 1rem;
+}
+
+.project-link {
+    display: inline-block;
+    color: #4a90e2;
+    text-decoration: none;
+    font-weight: 600;
+    transition: color 0.3s ease;
+}
+
+.project-link:hover {
+    color: #357abd;
+}
+
+.loading {
+    text-align: center;
+    padding: 4rem;
+    font-size: 1.2rem;
+    color: #555;
+}
+
+.error {
+    text-align: center;
+    padding: 4rem;
+    color: #e74c3c;
+}
+
+.no-projects {
+    text-align: center;
+    padding: 4rem;
+    color: #555;
+}
+
+/* ========================================
+   Video Projects Page Styles
+   ======================================== */
+
+.videos-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px 80px;
+}
+
+.videos-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    gap: 2rem;
+    margin-bottom: 3rem;
+}
+
+.video-card {
+    background: #fff;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(154, 0, 237, 0.3);
+    transition: transform 0.3s ease;
+}
+
+.video-card:hover {
+    transform: translateY(-5px);
+}
+
+.video-embed {
+    position: relative;
+    padding-bottom: 56.25%;
+    height: 0;
+    overflow: hidden;
+}
+
+.video-embed iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.video-info {
+    padding: 1.5rem;
+}
+
+.video-info h3 {
+    color: #1a2332;
+    font-size: 1.3rem;
+    margin-bottom: 0.5rem;
+}
+
+.video-info p {
+    color: #555;
+    line-height: 1.6;
+    font-size: 0.95rem;
+}
+
+.channel-link {
+    display: inline-block;
+    margin-top: 2rem;
+    padding: 1rem 2rem;
+    background: linear-gradient(45deg, rgba(237, 19, 19, 1) 0%, rgba(154, 0, 237, 1) 100%);
+    color: #fff;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: 600;
+    transition: transform 0.3s ease;
+}
+
+.channel-link:hover {
+    transform: translateY(-2px);
+}
+
+/* ========================================
+   Lesson Plans Page Styles
+   ======================================== */
+
+.lessons-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px 80px;
+}
+
+.lessons-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 2rem;
+}
+
+.lesson-card {
+    background: #fff;
+    border-radius: 8px;
+    padding: 2rem;
+    box-shadow: 0 4px 15px rgba(154, 0, 237, 0.3);
+    transition: transform 0.3s ease;
+}
+
+.lesson-card:hover {
+    transform: translateY(-5px);
+}
+
+.lesson-icon {
+    font-size: 3rem;
+    background: linear-gradient(45deg, rgba(237, 19, 19, 1) 0%, rgba(154, 0, 237, 1) 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 1rem;
+}
+
+.lesson-card h3 {
+    color: #1a2332;
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+}
+
+.lesson-card p {
+    color: #555;
+    line-height: 1.6;
+    margin-bottom: 1rem;
+}
+
+.lesson-meta {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    margin-bottom: 1rem;
+}
+
+.meta-tag {
+    background: rgba(154, 0, 237, 0.1);
+    color: #9a00ed;
+    padding: 0.3rem 0.8rem;
+    border-radius: 15px;
+    font-size: 0.85rem;
+    font-weight: 500;
+}
+
+.lesson-link {
+    display: inline-block;
+    color: #4a90e2;
+    text-decoration: none;
+    font-weight: 600;
+    transition: color 0.3s ease;
+}
+
+.lesson-link:hover {
+    color: #9a00ed;
+}
+
+.coming-soon {
+    text-align: center;
+    padding: 4rem 2rem;
+    background: #f8f9fa;
+    border-radius: 8px;
+    margin-bottom: 2rem;
+}
+
+.coming-soon i {
+    font-size: 4rem;
+    color: #9a00ed;
+    margin-bottom: 1rem;
+}
+
+.coming-soon h2 {
+    color: #1a2332;
+    margin-bottom: 1rem;
+}
+
+.coming-soon p {
+    color: #555;
+    font-size: 1.1rem;
+}
+
+/* ========================================
+   Responsive Media Queries for Special Pages
+   ======================================== */
+
+@media (max-width: 768px) {
+    .content-wrapper {
+        flex-direction: column;
+    }
+
+    .sidebar {
+        position: static;
+        flex: 1;
+        width: 100%;
+    }
+
+    .projects-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .videos-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .lessons-grid {
+        grid-template-columns: 1fr;
     }
 }

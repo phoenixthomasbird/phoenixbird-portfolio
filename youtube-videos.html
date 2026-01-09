@@ -10,110 +10,6 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Shadows+Into+Light&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <style>
-        .videos-header {
-            background: linear-gradient(45deg, rgba(237, 19, 19, 1) 0%, rgba(154, 0, 237, 1) 100%);
-            text-align: center;
-            padding: 120px 20px 80px;
-            margin-top: 0;
-            margin-bottom: 3rem;
-        }
-
-        .videos-header h1 {
-            font-size: 3rem;
-            color: #fff;
-            margin-bottom: 1rem;
-        }
-
-        .videos-header p {
-            font-size: 1.2rem;
-            color: #fff;
-            max-width: 700px;
-            margin: 0 auto;
-        }
-
-        .videos-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px 80px;
-        }
-
-        .videos-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-            gap: 2rem;
-            margin-bottom: 3rem;
-        }
-
-        .video-card {
-            background: #fff;
-            border-radius: 8px;
-            overflow: hidden;
-            box-shadow: 0 4px 15px rgba(154, 0, 237, 0.3);
-            transition: transform 0.3s ease;
-        }
-
-        .video-card:hover {
-            transform: translateY(-5px);
-        }
-
-        .video-embed {
-            position: relative;
-            padding-bottom: 56.25%; /* 16:9 aspect ratio */
-            height: 0;
-            overflow: hidden;
-        }
-
-        .video-embed iframe {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-        }
-
-        .video-info {
-            padding: 1.5rem;
-        }
-
-        .video-info h3 {
-            color: #1a2332;
-            font-size: 1.3rem;
-            margin-bottom: 0.5rem;
-        }
-
-        .video-info p {
-            color: #555;
-            line-height: 1.6;
-            font-size: 0.95rem;
-        }
-
-        .channel-link {
-            display: inline-block;
-            margin-top: 2rem;
-            padding: 1rem 2rem;
-            background: linear-gradient(45deg, rgba(237, 19, 19, 1) 0%, rgba(154, 0, 237, 1) 100%);
-            color: #fff;
-            text-decoration: none;
-            border-radius: 5px;
-            font-weight: 600;
-            transition: transform 0.3s ease;
-        }
-
-        .channel-link:hover {
-            transform: translateY(-2px);
-        }
-
-        @media (max-width: 768px) {
-            .videos-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .videos-header h1 {
-                font-size: 2rem;
-            }
-        }
-    </style>
 </head>
 <body>
     <header>
@@ -132,10 +28,12 @@
         </nav>
     </header>
 
-    <div class="videos-header">
-        <h1>Video Projects</h1>
-        <p>Example animation videos created with Adobe CS</p>
-    </div>
+    <section class="hero">
+        <div class="container">
+            <h1>Video Projects</h1>
+            <p class="tagline">Example animation videos created with Adobe CS</p>
+        </div>
+    </section>
 
     <div class="videos-container">
         <div class="videos-grid">
