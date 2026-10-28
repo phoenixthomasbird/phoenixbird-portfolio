@@ -9,6 +9,4 @@ Code I've written or directed, one folder per project. Larger projects were writ
 | [Agent SDK experiment](projects/agent-sdk-experiment/) | Claude Agent SDK fixing planted bugs under a restricted tool allowlist | Python, Claude Agent SDK |
 | [Learning Python](projects/learning/) | 35+ small practice programs: automation, PyQt windows, documents | Python |
 
-Coming next: a manuscript injection eval that tests whether AI copy editors obey instructions hidden in a manuscript.
-
 No API keys are in this repo. Projects that call an API read the key from a `.env` file, which is git-ignored.
