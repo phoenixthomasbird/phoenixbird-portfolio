@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="he">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>Hebrew Tutor</title>
+  <style>
+    :root {
+      --bg: #0d1117;
+      --surface: #161b22;
+      --surface2: #21262d;
+      --border: #30363d;
+      --blue: #1c6ef3;
+      --blue-light: #3b8bf7;
+      --text: #e6edf3;
+      --text-muted: #8b949e;
+      --green: #3fb950;
+      --red: #f85149;
+      --safe-bottom: env(safe-area-inset-bottom, 0px);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+
+    html, body {
+      height: 100%;
+      overflow: hidden;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* ── Header ── */
+    header {
+      background: var(--surface);
+      border-bottom: 1px solid var(--border);
+      padding: 12px 16px;
+      padding-top: calc(12px + env(safe-area-inset-top, 0px));
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-shrink: 0;
+      z-index: 10;
+    }
+
+    .logo {
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--blue-light);
+    }
+
+    .logo small {
+      font-size: 12px;
+      font-weight: 400;
+      color: var(--text-muted);
+      margin-left: 6px;
+    }
+
+    .status {
+      margin-left: auto;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+
+    .dot {
+      width: 7px; height: 7px;
+      border-radius: 50%;
+      background: var(--green);
+      flex-shrink: 0;
+      transition: background 0.3s;
+    }
+    .dot.thinking { background: var(--blue); animation: pulse 1s infinite; }
+    .dot.error    { background: var(--red); animation: none; }
+    .dot.recording { background: var(--red); animation: pulse 0.6s infinite; }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50%       { opacity: 0.25; }
+    }
+
+    /* ── Chat ── */
+    #chat {
+      flex: 1;
+      overflow-y: auto;
+      -webkit-overflow-scrolling: touch;
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .welcome {
+      margin: auto;
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 14px;
+      padding: 24px 16px;
+      max-width: 320px;
+    }
+
+    .welcome h2 {
+      font-size: 32px;
+      color: var(--text);
+      margin-bottom: 8px;
+    }
+
+    .welcome p { line-height: 1.6; }
+
+    .bubble {
+      max-width: 80%;
+      padding: 11px 15px;
+      border-radius: 18px;
+      font-size: 15px;
+      line-height: 1.55;
+      animation: pop 0.18s ease;
+    }
+
+    @keyframes pop {
+      from { opacity: 0; transform: scale(0.96) translateY(4px); }
+      to   { opacity: 1; transform: scale(1) translateY(0); }
+    }
+
+    .bubble.user {
+      align-self: flex-end;
+      background: var(--blue);
+      color: #fff;
+      border-bottom-right-radius: 4px;
+    }
+
+    .bubble.assistant {
+      align-self: flex-start;
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-bottom-left-radius: 4px;
+      direction: rtl;
+      text-align: right;
+      font-size: 18px;
+      cursor: pointer;
+      user-select: none;
+    }
+
+    .bubble.assistant:active { opacity: 0.75; }
+
+    .typing {
+      align-self: flex-start;
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      border-bottom-left-radius: 4px;
+      padding: 13px 16px;
+      display: flex;
+      gap: 5px;
+      align-items: center;
+    }
+
+    .typing span {
+      width: 7px; height: 7px;
+      border-radius: 50%;
+      background: var(--text-muted);
+      animation: bounce 1.2s infinite;
+    }
+    .typing span:nth-child(2) { animation-delay: 0.2s; }
+    .typing span:nth-child(3) { animation-delay: 0.4s; }
+
+    @keyframes bounce {
+      0%, 60%, 100% { transform: translateY(0); }
+      30%            { transform: translateY(-7px); }
+    }
+
+    /* ── Input row ── */
+    #input-row {
+      background: var(--surface);
+      border-top: 1px solid var(--border);
+      padding: 10px 12px;
+      padding-bottom: calc(10px + var(--safe-bottom));
+      display: flex;
+      align-items: flex-end;
+      gap: 8px;
+      flex-shrink: 0;
+    }
+
+    #msg {
+      flex: 1;
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      color: var(--text);
+      font-family: inherit;
+      font-size: 16px; /* 16px prevents iOS zoom on focus */
+      padding: 10px 14px;
+      outline: none;
+      resize: none;
+      overflow-y: auto;
+      max-height: 100px;
+      line-height: 1.4;
+      transition: border-color 0.2s;
+    }
+
+    #msg:focus { border-color: var(--blue); }
+    #msg::placeholder { color: var(--text-muted); }
+
+    .btn {
+      width: 44px; height: 44px;
+      border-radius: 50%;
+      border: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      flex-shrink: 0;
+      transition: transform 0.1s, background 0.15s;
+    }
+
+    .btn:active { transform: scale(0.88); }
+
+    #mic-btn {
+      background: var(--surface2);
+      border: 1px solid var(--border);
+    }
+
+    #mic-btn.recording {
+      background: var(--red);
+      border-color: var(--red);
+      animation: pulse-btn 0.8s infinite;
+    }
+
+    @keyframes pulse-btn {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(248,81,73,0.5); }
+      50%       { box-shadow: 0 0 0 8px rgba(248,81,73,0); }
+    }
+
+    #send-btn {
+      background: var(--blue);
+      color: #fff;
+    }
+
+    #send-btn:disabled {
+      background: var(--surface2);
+      color: var(--text-muted);
+      cursor: not-allowed;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="logo">עברית <small>Hebrew Tutor</small></div>
+  <div class="status">
+    <div class="dot" id="dot"></div>
+    <span id="status-text">Ready</span>
+  </div>
+</header>
+
+<div id="chat">
+  <div class="welcome">
+    <h2>שלום! 👋</h2>
+    <p>Tap the mic and speak in any language. I'll respond only in Hebrew.</p>
+    <p style="margin-top:8px; font-size:13px;">Tap any Hebrew bubble to replay it.</p>
+  </div>
+</div>
+
+<div id="input-row">
+  <button class="btn" id="mic-btn" title="Tap to record">
+    <svg id="mic-icon" xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
+      <rect x="9" y="2" width="6" height="12" rx="3"/>
+      <path d="M5 11a7 7 0 0 0 14 0" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+      <line x1="12" y1="18" x2="12" y2="22" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+      <line x1="8" y1="22" x2="16" y2="22" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+    </svg>
+    <svg id="stop-icon" xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="currentColor" style="display:none">
+      <rect x="6" y="6" width="12" height="12" rx="2"/>
+    </svg>
+  </button>
+  <textarea id="msg" placeholder="Or type here…" rows="1"></textarea>
+  <button class="btn" id="send-btn" title="Send">➤</button>
+</div>
+
+<script>
+  const chatEl  = document.getElementById('chat');
+  const msgEl   = document.getElementById('msg');
+  const sendBtn = document.getElementById('send-btn');
+  const micBtn  = document.getElementById('mic-btn');
+  const dot     = document.getElementById('dot');
+  const statusT = document.getElementById('status-text');
+
+  let history   = [];
+  let busy      = false;
+  let mediaRec  = null;
+  let recording = false;
+  let audioUnlocked = false;
+
+  // ── Status ────────────────────────────────────────────────────────────────
+  function setStatus(state, text) {
+    dot.className = 'dot' + (state ? ` ${state}` : '');
+    statusT.textContent = text;
+  }
+
+  // ── Bubbles ───────────────────────────────────────────────────────────────
+  function removeWelcome() {
+    document.querySelector('.welcome')?.remove();
+  }
+
+  function addBubble(role, text) {
+    removeWelcome();
+    const el = document.createElement('div');
+    el.className = `bubble ${role}`;
+    el.textContent = text;
+    if (role === 'assistant') {
+      el.addEventListener('click', () => playAudio(text));
+    }
+    chatEl.appendChild(el);
+    chatEl.scrollTop = chatEl.scrollHeight;
+    return el;
+  }
+
+  function showTyping() {
+    removeWelcome();
+    const el = document.createElement('div');
+    el.className = 'typing';
+    el.id = 'typing';
+    el.innerHTML = '<span></span><span></span><span></span>';
+    chatEl.appendChild(el);
+    chatEl.scrollTop = chatEl.scrollHeight;
+  }
+
+  function hideTyping() { document.getElementById('typing')?.remove(); }
+
+  // ── iOS audio unlock ──────────────────────────────────────────────────────
+  // iOS blocks audio until triggered by a user gesture. We unlock it on the
+  // first mic tap by playing a silent buffer via AudioContext.
+  function unlockAudio() {
+    if (audioUnlocked) return;
+    try {
+      const ctx = new (window.AudioContext || window.webkitAudioContext)();
+      const buf = ctx.createBuffer(1, 1, 22050);
+      const src = ctx.createBufferSource();
+      src.buffer = buf;
+      src.connect(ctx.destination);
+      src.start(0);
+      audioUnlocked = true;
+    } catch (_) {}
+  }
+
+  // ── TTS via /speak ────────────────────────────────────────────────────────
+  async function playAudio(text) {
+    try {
+      const res = await fetch('/speak', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ text }),
+      });
+      if (!res.ok) return;
+
+      const blob = await res.blob();
+      const url  = URL.createObjectURL(blob);
+      const audio = new Audio(url);
+      audio.onended = () => URL.revokeObjectURL(url);
+      await audio.play();
+    } catch (err) {
+      console.warn('TTS error:', err);
+    }
+  }
+
+  // ── Send to Claude ────────────────────────────────────────────────────────
+  async function send(text) {
+    text = text.trim();
+    if (!text || busy) return;
+
+    busy = true;
+    sendBtn.disabled = true;
+    msgEl.value = '';
+    msgEl.style.height = 'auto';
+
+    addBubble('user', text);
+    history.push({ role: 'user', content: text });
+
+    showTyping();
+    setStatus('thinking', 'Thinking…');
+
+    try {
+      const res = await fetch('/chat', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ messages: history }),
+      });
+
+      hideTyping();
+
+      if (!res.ok) {
+        const err = await res.json().catch(() => ({ detail: `HTTP ${res.status}` }));
+        throw new Error(err.detail);
+      }
+
+      const { response } = await res.json();
+      addBubble('assistant', response);
+      history.push({ role: 'assistant', content: response });
+      setStatus('', 'Ready');
+      playAudio(response); // fire-and-forget
+
+    } catch (err) {
+      hideTyping();
+      addBubble('assistant', `⚠️ ${err.message}`);
+      setStatus('error', 'Error');
+    } finally {
+      busy = false;
+      sendBtn.disabled = false;
+    }
+  }
+
+  // ── Text input ────────────────────────────────────────────────────────────
+  sendBtn.addEventListener('click', () => send(msgEl.value));
+
+  msgEl.addEventListener('keydown', e => {
+    if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); send(msgEl.value); }
+  });
+
+  msgEl.addEventListener('input', () => {
+    msgEl.style.height = 'auto';
+    msgEl.style.height = Math.min(msgEl.scrollHeight, 100) + 'px';
+  });
+
+  // ── Microphone (MediaRecorder) ────────────────────────────────────────────
+  micBtn.addEventListener('click', toggleMic);
+
+  async function toggleMic() {
+    unlockAudio();
+
+    if (recording) {
+      mediaRec?.stop();
+      return;
+    }
+
+    let stream;
+    try {
+      stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+    } catch (err) {
+      setStatus('error', 'Mic blocked');
+      return;
+    }
+
+    // Pick the best supported format
+    const mimeType =
+      MediaRecorder.isTypeSupported('audio/mp4')  ? 'audio/mp4'  :
+      MediaRecorder.isTypeSupported('audio/webm') ? 'audio/webm' : '';
+
+    mediaRec = new MediaRecorder(stream, mimeType ? { mimeType } : undefined);
+    const chunks = [];
+
+    mediaRec.ondataavailable = e => { if (e.data.size > 0) chunks.push(e.data); };
+
+    mediaRec.onstart = () => {
+      recording = true;
+      micBtn.classList.add('recording');
+      document.getElementById('mic-icon').style.display = 'none';
+      document.getElementById('stop-icon').style.display = '';
+      setStatus('recording', 'Listening…');
+    };
+
+    mediaRec.onstop = async () => {
+      recording = false;
+      micBtn.classList.remove('recording');
+      document.getElementById('mic-icon').style.display = '';
+      document.getElementById('stop-icon').style.display = 'none';
+      stream.getTracks().forEach(t => t.stop());
+
+      if (chunks.length === 0) { setStatus('', 'Ready'); return; }
+
+      const blob = new Blob(chunks, { type: mimeType || 'audio/webm' });
+      await transcribeAndSend(blob, mimeType);
+    };
+
+    mediaRec.start();
+  }
+
+  async function transcribeAndSend(blob, mimeType) {
+    setStatus('thinking', 'Transcribing…');
+
+    const ext  = mimeType?.includes('mp4') ? 'audio.mp4' : 'audio.webm';
+    const form = new FormData();
+    form.append('audio', blob, ext);
+
+    try {
+      const res = await fetch('/transcribe', { method: 'POST', body: form });
+      if (!res.ok) throw new Error(`Transcription failed (${res.status})`);
+      const { transcript } = await res.json();
+
+      if (transcript) {
+        msgEl.value = transcript; // show in input briefly
+        await send(transcript);
+      } else {
+        setStatus('', 'Ready');
+      }
+    } catch (err) {
+      setStatus('error', err.message);
+    }
+  }
+
+  // ── Keyboard / viewport handling (iOS) ───────────────────────────────────
+  // When the iOS keyboard opens, the visual viewport shrinks.
+  // Keep the input row anchored to the bottom of the visual viewport.
+  if (window.visualViewport) {
+    window.visualViewport.addEventListener('resize', () => {
+      document.body.style.height = window.visualViewport.height + 'px';
+      chatEl.scrollTop = chatEl.scrollHeight;
+    });
+  }
+</script>
+</body>
+</html>
